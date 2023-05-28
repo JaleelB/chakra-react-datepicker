@@ -1,34 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Heading, StackDivider, VStack, Text, Link } from '@chakra-ui/react'
+import DateTimePicker from './DateTimePicker'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <VStack
+      paddingX={{ base: '2rem', md: '8rem' }}
+      paddingY={{ base: '1rem', md: '4rem' }}
+      spacing={4}
+      minHeight={'600px'}
+      alignItems="flex-start"
+      divider={<StackDivider />}
+    >
+      <Heading>Chakra UI React Datepicker</Heading>
+        <Link
+          href="https://github.com/JaleelB/chakra-react-datepicker/src/datepicker-styles.ts"
+          textUnderlineOffset="0.2rem"
+        >
+          🔗 Source code for date picker component chakra styling
+        </Link>
+      <Text>An implementation of the react date picker package with the elegance and simplicity of Chakra UI!</Text>
+      <DateTimePicker/>
+    </VStack>
   )
 }
 
