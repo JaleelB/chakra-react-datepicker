@@ -14,7 +14,7 @@ function App() {
     >
       <Heading>Chakra UI React Datepicker</Heading>
         <Link
-          href="https://github.com/JaleelB/chakra-react-datepicker/src/datepicker-styles.ts"
+          href="https://github.com/JaleelB/chakra-react-datepicker/blob/main/src/datepicker-styles.ts"
           textUnderlineOffset="0.2rem"
         >
           🔗 Source code for date picker component chakra styling
