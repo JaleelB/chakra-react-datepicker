@@ -1,7 +1,16 @@
 import { Heading, StackDivider, VStack, Text, Link } from '@chakra-ui/react'
 import DateTimePicker from './DateTimePicker'
+import { useState } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 function App() {
+
+  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(null);
+
+  const handleDateChange = (date: Date | [Date, Date] | null) => {
+    setSelectedDate(date);
+  };
 
   return (
     <VStack
@@ -20,7 +29,10 @@ function App() {
           🔗 Source code for date picker component chakra styling
         </Link>
       <Text>An implementation of the react date picker package with the elegance and simplicity of Chakra UI!</Text>
-      <DateTimePicker/>
+      <DateTimePicker
+        onChange={handleDateChange}
+        calendarType='dateTime'
+      />
     </VStack>
   )
 }
