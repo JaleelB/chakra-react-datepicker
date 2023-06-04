@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
 
-  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleDateChange = (date: Date | [Date, Date] | null) => {
@@ -55,22 +55,25 @@ function App() {
                   <Text fontSize="lg" fontWeight="bold" textTransform="capitalize">{type}</Text>
                   <Text mb={4}>{description}</Text>
                   {startDate && (
-                    <Text mt={4}>
-                      Selected Start Date: {startDate.toLocaleDateString()} {type !== 'default' && startDate.toLocaleTimeString()}
-                    </Text>
+                    <Text mt={4}>Selected Start Date: {startDate.toLocaleDateString()}</Text>
+                  )}
+                  {type !== 'default' && type !== 'dateRange' && (
+                    <Text mb={4}>Time: {startDate?.toLocaleTimeString()}</Text>
                   )}
                   {endDate && (
-                    <Text mt={1} mb={4}>
+                    <Text>
                       Selected End Date: {endDate.toLocaleDateString()} {type !== 'dateRange' && endDate.toLocaleTimeString()}
                     </Text>
                   )}
-                  <DateTimePicker
-                    onChange={handleDateChange}
-                    calendarType={type}
-                    selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
-                    startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
-                    endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}
-                  />
+                  <Box mb={4}>
+                    <DateTimePicker
+                      onChange={handleDateChange}
+                      calendarType={type}
+                      selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
+                      startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
+                      endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}
+                    />
+                  </Box>
                 </TabPanel>
               ))}
           </TabPanels>
