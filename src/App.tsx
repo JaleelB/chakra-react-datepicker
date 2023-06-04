@@ -6,11 +6,26 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
 
-  const [selectedDate, setSelectedDate] = useState<Date | [Date, Date] | null>(null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleDateChange = (date: Date | [Date, Date] | null) => {
-    setSelectedDate(date);
+    if (Array.isArray(date)) {
+      setStartDate(date[0]);
+      setEndDate(date[1]);
+    } else {
+      setStartDate(date);
+      setEndDate(null);
+    }
   };
+
+  const calendarTypes = [
+    { type: 'default', description: 'This is a simple date picker.' },
+    { type: 'dateTime', description: 'This date picker allows you to select both date and time.' },
+    { type: 'dateRange', description: 'This date picker allows you to select a range of dates.' },
+    { type: 'dateTimeRange', description: 'This date picker allows you to select a range of dates and times.' },
+  ];
+
 
   return (
     <Box
@@ -35,31 +50,30 @@ function App() {
               </Flex>
             </TabList>
             <TabPanels>
-              <TabPanel borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
-                <DateTimePicker
-                  onChange={handleDateChange}
-                  calendarType='default'
-                />
-              </TabPanel>
-              <TabPanel borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
-                <DateTimePicker
-                  onChange={handleDateChange}
-                  calendarType='dateTime'
-                />
-              </TabPanel>
-              <TabPanel borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
-                <DateTimePicker
-                  onChange={handleDateChange}
-                  calendarType='dateRange'
-                />
-              </TabPanel>
-              <TabPanel borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
-                <DateTimePicker
-                  onChange={handleDateChange}
-                  calendarType='dateTimeRange'
-                />
-              </TabPanel>
-            </TabPanels>
+              {calendarTypes.map(({ type, description }) => (
+                <TabPanel key={type} borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
+                  <Text fontSize="lg" fontWeight="bold" textTransform="capitalize">{type}</Text>
+                  <Text mb={4}>{description}</Text>
+                  {startDate && (
+                    <Text mt={4}>
+                      Selected Start Date: {startDate.toLocaleDateString()} {type !== 'default' && startDate.toLocaleTimeString()}
+                    </Text>
+                  )}
+                  {endDate && (
+                    <Text mt={1} mb={4}>
+                      Selected End Date: {endDate.toLocaleDateString()} {type !== 'dateRange' && endDate.toLocaleTimeString()}
+                    </Text>
+                  )}
+                  <DateTimePicker
+                    onChange={handleDateChange}
+                    calendarType={type}
+                    selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
+                    startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
+                    endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}
+                  />
+                </TabPanel>
+              ))}
+          </TabPanels>
           </Flex>
         </Tabs>
       </Box>

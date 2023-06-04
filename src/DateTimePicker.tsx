@@ -63,7 +63,6 @@ const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onC
         onChange={onChange}
         renderCustomHeader={Header}
         inline
-        // customInput={<Button>Choose Date/Time</Button>}
         {...customProps}
         {...props}
       />
