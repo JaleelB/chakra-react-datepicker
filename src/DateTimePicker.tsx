@@ -2,7 +2,7 @@ import { FC, SyntheticEvent } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import Header from './Header';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import DatePickerStyles from './datepicker-styles';
 
@@ -62,7 +62,8 @@ const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onC
       <DatePicker
         onChange={onChange}
         renderCustomHeader={Header}
-        customInput={<Button>Choose Date/Time</Button>}
+        inline
+        // customInput={<Button>Choose Date/Time</Button>}
         {...customProps}
         {...props}
       />
