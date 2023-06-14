@@ -26,7 +26,7 @@ const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onC
       customProps = {
         selected: props.selected,
         showTimeSelect: true,
-        timeFormat: 'HH:mm',
+        timeFormat: 'hh:mm aa', // 12-hour format with AM/PM
         timeIntervals: 15,
         dateFormat: 'MM/dd/yyyy h:mm aa',
       };
@@ -47,7 +47,7 @@ const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onC
         endDate: props.endDate,
         selectsRange: true,
         showTimeSelect: true,
-        timeFormat: 'HH:mm',
+        timeFormat: 'hh:mm aa', // 12-hour format with AM/PM
         timeIntervals: 15,
         dateFormat: 'MM/dd/yyyy h:mm aa',
       };
