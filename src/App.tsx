@@ -24,6 +24,7 @@ function App() {
     { type: 'dateTime', description: 'This date picker allows you to select both date and time.' },
     { type: 'dateRange', description: 'This date picker allows you to select a range of dates.' },
     { type: 'dateTimeRange', description: 'This date picker allows you to select a range of dates and times.' },
+    { type: 'button', description: 'This date picker is rendered on button press.' }, 
   ];
 
 
@@ -47,10 +48,11 @@ function App() {
                 <Tab justifyContent="flex-start" borderRadius={4}>Date Time</Tab>
                 <Tab justifyContent="flex-start" borderRadius={4}>Date Range</Tab>
                 <Tab justifyContent="flex-start" borderRadius={4}>Date Time Range</Tab>
+                <Tab justifyContent="flex-start" borderRadius={4}>Render With Input</Tab>
               </Flex>
             </TabList>
             <TabPanels>
-              {calendarTypes.map(({ type, description }) => (
+            {calendarTypes.map(({ type, description }) => (
                 <TabPanel key={type} borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
                   <Text fontSize="lg" fontWeight="bold" textTransform="capitalize">{type}</Text>
                   <Text mb={4}>{description}</Text>
@@ -69,6 +71,7 @@ function App() {
                     <DateTimePicker
                       onChange={handleDateChange}
                       calendarType={type}
+                      inline={type !== 'button'}
                       selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
                       startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
                       endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}

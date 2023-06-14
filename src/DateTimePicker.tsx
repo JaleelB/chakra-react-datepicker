@@ -2,7 +2,7 @@ import { FC, SyntheticEvent } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import Header from './Header';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import DatePickerStyles from './datepicker-styles';
 
@@ -10,9 +10,15 @@ import DatePickerStyles from './datepicker-styles';
 interface DateTimePickerProps extends Omit<ReactDatePickerProps, 'onChange'> {
   calendarType?: string;
   onChange: (date: Date | [Date, Date] | null, event: SyntheticEvent<HTMLElement> | undefined) => void;
+  inline?: boolean;
 }
 
-const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onChange, ...props }) => {
+const DateTimePicker: FC<DateTimePickerProps> = ({ 
+  calendarType = "default", 
+  onChange, 
+  inline = false,
+  ...props 
+}) => {
   let customProps = {};
 
   switch (calendarType) {
@@ -62,7 +68,8 @@ const DateTimePicker: FC<DateTimePickerProps> = ({ calendarType = "default", onC
       <DatePicker
         onChange={onChange}
         renderCustomHeader={Header}
-        inline
+        inline={inline}
+        customInput={inline ? undefined : <Button>Choose Date/Time</Button>}
         {...customProps}
         {...props}
       />
