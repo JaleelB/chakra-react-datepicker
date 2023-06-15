@@ -25,6 +25,7 @@ function App() {
     { type: 'dateRange', description: 'This date picker allows you to select a range of dates.' },
     { type: 'dateTimeRange', description: 'This date picker allows you to select a range of dates and times.' },
     { type: 'button', description: 'This date picker is rendered on button press.' }, 
+    { type: 'timeOnly', description: 'This calendar allows you to select only the time without the date.' },
   ];
 
 
@@ -44,11 +45,9 @@ function App() {
           <Flex width="100%" direction={{ base: 'column', md: 'row' }} gap={{ base: 0, md: 16 }}>
             <TabList width={{base: "100%", md: "250px"}}>
               <Flex width="100%" direction={{ base: 'column' }}>
-                <Tab justifyContent="flex-start" borderRadius={4}>Date</Tab>
-                <Tab justifyContent="flex-start" borderRadius={4}>Date Time</Tab>
-                <Tab justifyContent="flex-start" borderRadius={4}>Date Range</Tab>
-                <Tab justifyContent="flex-start" borderRadius={4}>Date Time Range</Tab>
-                <Tab justifyContent="flex-start" borderRadius={4}>Render With Input</Tab>
+                {calendarTypes.map(({ type }) => (
+                  <Tab key={type} justifyContent="flex-start" borderRadius={4}>{type}</Tab>
+                ))}
               </Flex>
             </TabList>
             <TabPanels>
@@ -56,7 +55,7 @@ function App() {
                 <TabPanel key={type} borderLeft={{ base: 0, md: "1px" }} borderColor={{ base: "none", md: "gray.200" }} paddingLeft={{ base: 0, md: 16 }} paddingRight={0} paddingY={{ base: 8, md: 0 }}>
                   <Text fontSize="lg" fontWeight="bold" textTransform="capitalize">{type}</Text>
                   <Text mb={4}>{description}</Text>
-                  {startDate && (
+                  {startDate && type !== "timeOnly" && (
                     <Text mt={4}>Selected Start Date: {startDate.toLocaleDateString()}</Text>
                   )}
                   {type !== 'default' && type !== 'dateRange' && (

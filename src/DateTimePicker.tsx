@@ -58,6 +58,17 @@ const DateTimePicker: FC<DateTimePickerProps> = ({
         dateFormat: 'MM/dd/yyyy h:mm aa',
       };
       break;
+    case 'timeOnly':
+      customProps = {
+        selected: props.selected,
+        showTimeSelect: true,
+        showTimeSelectOnly: true,
+        timeIntervals: 15,
+        timeCaption: "Time",
+        dateFormat: 'h:mm aa',
+      };
+      break;
+
     default:
       break;
   }
