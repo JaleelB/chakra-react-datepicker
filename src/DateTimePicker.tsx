@@ -11,12 +11,19 @@ interface DateTimePickerProps extends Omit<ReactDatePickerProps, 'onChange'> {
   calendarType?: string;
   onChange: (date: Date | [Date, Date] | null, event: SyntheticEvent<HTMLElement> | undefined) => void;
   inline?: boolean;
+  months?: string[];
+  days?: string[]; 
+  amPm?: string[];
 }
+
 
 const DateTimePicker: FC<DateTimePickerProps> = ({ 
   calendarType = "default", 
   onChange, 
   inline = false,
+  months = [],
+  days = [],
+  amPm = [],
   ...props 
 }) => {
   let customProps = {};
@@ -78,7 +85,7 @@ const DateTimePicker: FC<DateTimePickerProps> = ({
       <Global styles={DatePickerStyles()} />
       <DatePicker
         onChange={onChange}
-        renderCustomHeader={Header}
+        renderCustomHeader={(props) => <Header {...props} months={months} days={days} amPm={amPm} />}
         inline={inline}
         customInput={inline ? undefined : <Button>Choose Date/Time</Button>}
         {...customProps}

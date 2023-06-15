@@ -67,14 +67,15 @@ function App() {
                     </Text>
                   )}
                   <Box mb={4}>
-                    <DateTimePicker
-                      onChange={handleDateChange}
-                      calendarType={type}
-                      inline={type !== 'button'}
-                      selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
-                      startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
-                      endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}
-                    />
+                  <DateTimePicker
+                    onChange={handleDateChange}
+                    calendarType={type}
+                    inline={type !== 'button'}
+                    selected={type === 'default' || type === 'dateTime' ? startDate : undefined}
+                    startDate={type === 'dateRange' || type === 'dateTimeRange' ? startDate : undefined}
+                    endDate={type === 'dateRange' || type === 'dateTimeRange' ? endDate : undefined}
+                    months={['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']}
+                  />
                   </Box>
                 </TabPanel>
               ))}
