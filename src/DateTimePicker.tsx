@@ -2,9 +2,10 @@ import { FC, SyntheticEvent } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import Header from './Header';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box, Button } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import DatePickerStyles from './datepicker-styles';
+import CustomInput from './Input';
 
 
 interface DateTimePickerProps extends Omit<ReactDatePickerProps, 'onChange'> {
@@ -12,8 +13,7 @@ interface DateTimePickerProps extends Omit<ReactDatePickerProps, 'onChange'> {
   onChange: (date: Date | [Date, Date] | null, event: SyntheticEvent<HTMLElement> | undefined) => void;
   inline?: boolean;
   months?: string[];
-  days?: string[]; 
-  amPm?: string[];
+  days?: string[];
 }
 
 
@@ -23,7 +23,6 @@ const DateTimePicker: FC<DateTimePickerProps> = ({
   inline = false,
   months = [],
   days = [],
-  amPm = [],
   ...props 
 }) => {
   let customProps = {};
@@ -85,9 +84,16 @@ const DateTimePicker: FC<DateTimePickerProps> = ({
       <Global styles={DatePickerStyles()} />
       <DatePicker
         onChange={onChange}
-        renderCustomHeader={(props) => <Header {...props} months={months} days={days} amPm={amPm} />}
+        renderCustomHeader={(props) => <Header {...props} months={months} />}
         inline={inline}
-        customInput={inline ? undefined : <Button>Choose Date/Time</Button>}
+        customInput={
+          inline ? undefined :
+          <CustomInput 
+            value={props.selected ? props.selected.toLocaleDateString() : ''} 
+            onClick={() => alert(props.selected?.toLocaleDateString())} 
+            onChange={(event) => alert(event.target.value)}
+          />
+        }
         {...customProps}
         {...props}
       />

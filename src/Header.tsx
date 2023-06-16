@@ -10,6 +10,7 @@ interface CustomHeaderProps {
   prevMonthButtonDisabled: boolean;
   nextMonthButtonDisabled: boolean;
   months?: string[]; 
+  days?: string[];
 }
 
 
@@ -42,7 +43,7 @@ const Header: React.FC<CustomHeaderProps> = ({
       </Button>
       <Flex>
         <Select
-          value={months ? months[date.getMonth()] : defaultMonths[date.getMonth()]}
+          value={months && months.length !== 0 ? months[date.getMonth()] : defaultMonths[date.getMonth()]}
           onChange={({ target: { value } }) => changeMonth((months ? months.indexOf(value) : defaultMonths.indexOf(value)))}
         >
           {(months || defaultMonths).map((month, index) => (
