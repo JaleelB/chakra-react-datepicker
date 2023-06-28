@@ -1,4 +1,4 @@
-import { Heading, Text, Box, Tab, TabList, TabPanel, TabPanels, Tabs, Flex, Input, Button } from '@chakra-ui/react'
+import { Heading, Text, Box, Tab, TabList, TabPanel, TabPanels, Tabs, Flex, Button } from '@chakra-ui/react'
 import DateTimePicker from './DateTimePicker'
 import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
